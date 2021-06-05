@@ -1,0 +1,3 @@
+class InvalidAction < StandardError
+end
+

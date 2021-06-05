@@ -1,0 +1,2 @@
+class SnakeAttack < StandardError
+end

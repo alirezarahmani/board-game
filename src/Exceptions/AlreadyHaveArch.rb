@@ -1,0 +1,2 @@
+class AlreadyHaveArch < StandardError
+end

@@ -1,0 +1,4 @@
+class YouWon < StandardError
+end
+
+

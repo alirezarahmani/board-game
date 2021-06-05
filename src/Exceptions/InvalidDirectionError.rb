@@ -1,0 +1,3 @@
+class InvalidDirectionError < StandardError
+end
+
