@@ -21,10 +21,10 @@ class Position
   def is_on_board(board)
     raise TypeError unless board.is_a? GameBoard
     if @x_dim > board.x_dim || @x_dim < 0
-      raise OutOfBoard, 'Ooops here is dead end, you can not go it, try other way'
+      raise OutOfBoard, 'Ooops here is dead end, you can not go it, try other ways'
     end
     if @y_dim > board.y_dim || @y_dim < 0
-      raise OutOfBoard, 'Ooops here is dead end, you can not go it, try other way'
+      raise OutOfBoard, 'Ooops here is dead end, you can not go it, try other ways'
     end
   end
 

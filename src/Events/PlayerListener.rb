@@ -16,7 +16,7 @@ class PlayerListener < Listener
 
     def attack_snake
       @player.reset_position
-      raise SnakeAttack, 'snake attacked you, you are injured and you are at beginning now'
+      raise SnakeAttack, 'snake bite you, you are injured and you are at beginning now'
     end
 
     def won
@@ -31,7 +31,6 @@ class PlayerListener < Listener
 
     def move
       @player.move(@play_load[:action])
-      # puts @play_load[:msg]
     end
 
     def equipment_added

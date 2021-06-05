@@ -13,12 +13,13 @@ require 'tty-prompt'
 require 'pastel'
 
 prompt = TTY::Prompt.new(symbols: {marker: ">"})
+name = prompt.ask('welcome to Game, What is your name?')
 
 loop do
   begin
     current_room = player.current_room
-    cmd = prompt.ask(current_room.question)
-    prompt.say(current_room.player_reaction(cmd, player))
+    cmd = prompt.ask(name + ', ' + current_room.question)
+    current_room.player_reaction(cmd, player)
   rescue OutOfBoard, AlreadyHaveArch, InvalidAction,SnakeAttack, InvalidDirectionError => ex
     prompt.warn(ex)
   rescue TypeError => ex
