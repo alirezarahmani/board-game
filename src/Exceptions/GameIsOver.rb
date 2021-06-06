@@ -1,4 +1,2 @@
 class GameIsOver < StandardError
 end
-
-

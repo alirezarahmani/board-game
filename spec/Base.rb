@@ -17,8 +17,9 @@ require_relative '../src/Domain/Room'
 class Base
 
   def reset_board
-    GameBoard.new(3,3)
+    GameBoard.new(3, 3)
   end
+
   def reset_player
     board = reset_board
     Player.new(board)

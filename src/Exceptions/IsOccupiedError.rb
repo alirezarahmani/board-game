@@ -1,3 +1,2 @@
 class IsOccupiedError < StandardError
 end
-

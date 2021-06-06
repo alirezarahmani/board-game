@@ -1,12 +1,9 @@
 require_relative '../Events/Publisher'
 class Room
+  attr_reader :event
 
   def initialize
     @event = Publisher.new
-  end
-
-  def event
-     @event
   end
 
   def question

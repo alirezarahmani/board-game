@@ -1,14 +1,15 @@
 require_relative '../ValueObjects/Position'
 require_relative '../Exceptions/AlreadyHaveArch'
 
+# Player Class
 class Player
-  @current_position
-  @board
-  @is_game_over
+  @current_position = ''
+  attr_reader :is_game_over, :board
 
   def initialize(board)
     raise TypeError unless board.is_a? GameBoard
-    @current_position =  Position.new(0, 0, board)
+
+    @current_position = Position.new(0, 0, board)
     @equipments = []
     @board = board
     @is_game_over = false
@@ -20,34 +21,29 @@ class Player
 
   def add_equipment(equipment)
     raise TypeError unless equipment.is_a? Equipment
-    unless @equipments.include? equipment
-      @equipments.append(equipment)
-    end
+    raise AlreadyHaveArch, 'You can not carry more th an one Arch' if arch?
+
+    @equipments.append(equipment)
   end
 
   # Tell,Don't ask in OOP
   # encapsulate equipments
-  #@return[Boolean]
-  def has_arch
+  # @return[Boolean]
+  def arch?
     @equipments.each do |equipment|
-      if equipment.is_a? ArcEquipment
-        return true
-      end
+      return true if equipment.is_a? ArcEquipment
     end
     false
   end
 
-  def is_game_over
-    @is_game_over
-  end
-
   def reset_position
-    @current_position =  Position.new(0, 0, board)
+    @current_position = Position.new(0, 0, board)
   end
 
   def move(direction)
     raise TypeError unless direction.is_a? Direction
-    raise GameOverError if @is_game_over
+    raise GameIsOver if @is_game_over
+
     case direction.direction
     when Direction::LEFT
       move_left
@@ -60,16 +56,10 @@ class Player
     else
       raise TypeError
     end
+
   end
 
   def current_room
-    room =  @board.room_of_cell(@current_position)
-    if room.is_a? ArcRoom
-      if has_arch
-        move_left
-        raise AlreadyHaveArch 'You have been here and got the Arch, now find Evil'
-      end
-    end
     @board.room_of_cell(@current_position)
   end
 
@@ -91,10 +81,6 @@ class Player
 
   def move_down
     @current_position = Position.new(@current_position.x_dim, @current_position.y_dim - 1, @board)
-  end
-
-  def board
-    @board
   end
   private :move_left, :move_down, :move_up, :move_right
 
